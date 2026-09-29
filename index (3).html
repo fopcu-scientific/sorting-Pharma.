@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Pharma Sorting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700;900&family=Cinzel+Decorative:wght@700;900&family=Lalezar&family=Cairo:wght@400;600;700&family=Josefin+Sans:wght@600;700&display=swap">
+<style>
+/* Layout: light printable "party kit" — bunting across the top, a big condensed serif title, question cards like printed sheets, and a framed certificate as the prize. One bright look, single theme by choice. */
+:root{
+  --bg:#eef2f6;
+  --paper:#ffffff;
+  --ink:#1d1b22;
+  --ink-2:#5d5a66;
+  --line:#d9dde4;
+  --navy:#1f3b73;
+  --pharma:#dd5a18;
+  --phyto:#4f8a22;
+  --ceutics:#9c2f6e;
+  --medic:#0f7285;
+  --f-title:"Playfair Display SC","Times New Roman",serif;
+  --f-deco:"Cinzel Decorative","Times New Roman",serif;
+  --f-caps:"Josefin Sans","Segoe UI",sans-serif;
+  --f-ar-d:"Lalezar","Cairo",sans-serif;
+  --f-ar:"Cairo","Segoe UI",Tahoma,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ar);font-size:17px;line-height:1.7;padding-inline:16px;padding-block:0 48px;overflow-x:hidden}
+p{margin:0}
+.wrap{max-width:600px;margin-inline:auto;display:flex;flex-direction:column;gap:20px}
+
+/* bunting */
+.bunting{height:74px;margin-inline:-16px;overflow:hidden;position:relative}
+.bunting svg{position:absolute;left:50%;transform:translateX(-50%);top:0;width:max(100%,640px);height:74px}
+.flag{transform-box:fill-box;transform-origin:50% 0;animation:flap 3.2s ease-in-out infinite}
+@keyframes flap{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.org{text-align:center;font-family:var(--f-caps);font-size:12px;letter-spacing:.32em;color:var(--ink-2);direction:ltr;margin-top:-6px}
+.org b{color:var(--navy)}
+
+/* title */
+.title{text-align:center;display:flex;flex-direction:column;gap:6px}
+.title h1{margin:0;font-family:var(--f-title);font-weight:900;font-size:clamp(46px,13vw,76px);line-height:.95;letter-spacing:.01em;color:var(--ink);direction:ltr}
+.title h1 span{display:block}
+.title h1 .the{font-size:.42em;letter-spacing:.3em;color:var(--ink-2);font-weight:700}
+.title .ar{font-family:var(--f-ar-d);font-size:clamp(24px,6.5vw,32px);color:var(--navy);line-height:1.3}
+.lede{text-align:center;color:var(--ink-2);max-width:36ch;margin-inline:auto}
+
+/* sheet */
+.sheet{background:var(--paper);border-radius:4px;box-shadow:0 1px 0 var(--line),0 18px 40px -18px rgba(31,59,115,.35);padding:26px 20px 22px;display:flex;flex-direction:column;gap:18px;position:relative}
+
+/* houses on intro */
+.houses{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.hcard{border:2px solid var(--c);outline:1px solid var(--c);outline-offset:-7px;border-radius:3px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:var(--paper);transition:transform .2s}
+.hcard:hover{transform:translateY(-3px) rotate(-1deg)}
+.hcard svg{width:74px;height:74px}
+.hcard .nm{font-family:var(--f-deco);font-weight:900;font-size:clamp(15px,4.2vw,19px);color:var(--c);direction:ltr;line-height:1.2}
+.hcard .tr{font-family:var(--f-caps);font-size:10px;letter-spacing:.14em;color:var(--ink-2);direction:ltr}
+
+.btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-block;text-align:center;font-family:var(--f-caps);font-weight:700;font-size:17px;letter-spacing:.14em;padding:15px 30px 13px;background:var(--navy);color:#fff;border-radius:2px;box-shadow:0 4px 0 #122449;transition:transform .1s,box-shadow .1s}
+.btn:hover{background:#264a8f}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #122449}
+.btn:focus-visible{outline:3px solid var(--pharma);outline-offset:3px}
+.btn .ar{font-family:var(--f-ar-d);letter-spacing:0;font-size:20px;font-weight:400}
+.btn.alt{background:var(--paper);color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset,0 4px 0 var(--navy)}
+.btn.alt:active{box-shadow:0 0 0 2px var(--navy) inset,0 1px 0 var(--navy)}
+.center{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.linkbtn{all:unset;cursor:pointer;color:var(--ink-2);font-size:15px;border-bottom:1px solid var(--line)}
+.linkbtn[disabled]{opacity:.3;cursor:default}
+.linkbtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+
+/* question */
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;direction:ltr}
+.qtag{font-family:var(--f-caps);font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--navy)}
+.pips{display:flex;gap:5px}
+.pip{width:16px;height:20px;background:var(--line);clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%);transition:background .3s,transform .3s}
+.pip.on{background:var(--c)}
+.pip.now{background:var(--navy);transform:translateY(3px)}
+.q{margin:0;font-family:var(--f-ar-d);font-weight:400;font-size:clamp(24px,6.4vw,30px);line-height:1.45;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;gap:12px;align-items:center;padding:12px 14px;border:2px solid var(--line);border-radius:3px;background:var(--paper);font-family:var(--f-ar);font-size:17px;line-height:1.55;color:var(--ink);transition:border-color .15s,transform .15s,background .15s}
+.opt:hover{border-color:var(--navy);transform:translateX(-3px)}
+.opt:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.opt .k{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--bg);font-family:var(--f-caps);font-weight:700;font-size:15px;color:var(--navy);transition:background .15s,color .15s}
+.opt.picked{border-color:var(--navy);background:#f3f6fc;animation:pop .35s ease}
+.opt.picked .k{background:var(--navy);color:#fff}
+@keyframes pop{40%{transform:scale(1.03)}}
+.opt [lang="en"]{direction:ltr;unicode-bidi:isolate;font-family:var(--f-title);font-weight:700;font-size:18px}
+.qfoot{display:flex;justify-content:space-between;align-items:center}
+.count{font-family:var(--f-caps);font-size:13px;letter-spacing:.14em;color:var(--ink-2);direction:ltr}
+
+/* sorting moment */
+.sorting{align-items:center;text-align:center;padding-block:36px}
+.sorting .lbl{font-family:var(--f-caps);font-weight:700;letter-spacing:.3em;font-size:13px;color:var(--ink-2);direction:ltr}
+.reel{width:190px;height:220px;position:relative}
+.reel .banner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:22px;gap:6px;color:#fff;background:var(--c);clip-path:polygon(0 0,100% 0,100% 84%,50% 100%,0 84%);transition:background .15s}
+.reel .banner svg{width:96px;height:96px;background:#fff;border-radius:50%;padding:6px}
+.reel .banner .nm{font-family:var(--f-deco);font-weight:900;font-size:17px;direction:ltr}
+.reel.shake{animation:shake .12s linear infinite}
+@keyframes shake{25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+.sorting .say{font-family:var(--f-ar-d);font-size:26px;color:var(--navy);min-height:1.5em}
+
+/* certificate */
+.cert{max-width:100%;min-width:0;background:var(--paper);border:3px solid var(--c);outline:1.5px solid var(--c);outline-offset:-10px;padding:30px 22px 22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;box-shadow:0 22px 50px -20px rgba(0,0,0,.35);animation:drop .7s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes drop{from{transform:translateY(-40px) rotate(-4deg) scale(.9);opacity:0}to{transform:none;opacity:1}}
+.cert .yh{font-family:var(--f-title);font-weight:700;font-size:clamp(14px,4vw,18px);letter-spacing:.06em;color:var(--ink-2);direction:ltr}
+.cert .dept{font-family:var(--f-deco);font-weight:900;font-size:clamp(34px,10.5vw,58px);line-height:1.05;color:var(--c);direction:ltr;word-break:break-word}
+.cert .dept.long{font-size:clamp(26px,8vw,44px)}
+.cert .house-ar{font-family:var(--f-ar-d);font-size:24px;color:var(--ink);line-height:1.3}
+.cert .virt{font-family:var(--f-caps);font-weight:700;font-size:clamp(11px,3.1vw,13px);letter-spacing:.16em;color:var(--ink);direction:ltr}
+.cert .virt-ar{font-size:15px;color:var(--ink-2)}
+.cert .mid{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:14px;width:100%;margin-top:8px}
+.cert .mid svg{width:108px;height:108px}
+.namefield{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:2px;text-align:center}
+.namefield input{all:unset;display:block;width:100%;box-sizing:border-box;border-bottom:1.5px solid var(--ink);font-family:var(--f-ar-d);font-size:24px;text-align:center;padding:2px 4px;color:var(--ink);min-width:0}
+.namefield input::placeholder{color:#b9bcc4}
+.namefield input:focus-visible{border-bottom-color:var(--c);background:#fafbfd}
+.namefield label{font-family:var(--f-caps);font-weight:700;font-size:11px;letter-spacing:.24em;color:var(--ink-2);direction:ltr}
+.cert .foot{font-family:var(--f-caps);font-weight:700;font-size:clamp(9px,2.6vw,11px);letter-spacing:.18em;color:var(--ink-2);border-top:1px solid var(--line);padding-top:10px;width:100%;direction:ltr;margin-top:6px}
+
+.info{display:flex;flex-direction:column;gap:14px}
+.info h3{margin:0;font-family:var(--f-ar-d);font-weight:400;font-size:22px;color:var(--navy)}
+.tally{display:flex;flex-direction:column;gap:8px}
+.trow{display:grid;grid-template-columns:7.4em 1fr 1.6em;gap:10px;align-items:center}
+.trow .n{font-family:var(--f-deco);font-weight:700;font-size:13px;color:var(--c);direction:ltr;text-align:right}
+.trow .bar{height:12px;background:var(--bg);border-radius:2px;overflow:hidden}
+.trow .bar i{display:block;height:100%;width:0;background:var(--c);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.trow .v{font-family:var(--f-caps);font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;direction:ltr}
+.hint{font-size:14px;color:var(--ink-2);text-align:center}
+.toast{font-size:14px;color:var(--navy);text-align:center;min-height:1.3em}
+.note{text-align:center;font-size:13px;color:var(--ink-2)}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:10}
+.enter{animation:enter .45s ease both}
+@keyframes enter{from{opacity:.001;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+<div class="bunting" aria-hidden="true" id="bunting"></div>
+<div class="wrap" dir="rtl" lang="ar">
+  <p class="org"><b>FOPCU</b> · SCIENTIFIC COMMITTEE</p>
+  <main id="app"></main>
+  <p class="note">اختبار للمتعة من اللجنة العلمية، اتحاد طلاب كلية الصيدلة جامعة القاهرة. كل الأقسام هتدرسها.</p>
+</div>
+
+<script>
+/* ── original animal illustrations ── */
+const ART={
+ pharma:`<svg viewBox="0 0 120 120" aria-hidden="true">
+  <g fill="#e8892f">${Array.from({length:14},(_,k)=>{const a=k/14*Math.PI*2;return `<circle cx="${60+Math.cos(a)*34}" cy="${62+Math.sin(a)*34}" r="17"/>`}).join("")}</g>
+  <circle cx="60" cy="62" r="36" fill="#c9661c"/>
+  <circle cx="36" cy="38" r="9" fill="#f4c27a"/><circle cx="84" cy="38" r="9" fill="#f4c27a"/>
+  <circle cx="36" cy="38" r="4.5" fill="#d98a4a"/><circle cx="84" cy="38" r="4.5" fill="#d98a4a"/>
+  <ellipse cx="60" cy="64" rx="28" ry="27" fill="#f4c27a"/>
+  <ellipse cx="60" cy="78" rx="15" ry="11" fill="#fff4dd"/>
+  <circle cx="49" cy="58" r="4" fill="#2a1a10"/><circle cx="71" cy="58" r="4" fill="#2a1a10"/>
+  <circle cx="50.3" cy="56.6" r="1.3" fill="#fff"/><circle cx="72.3" cy="56.6" r="1.3" fill="#fff"/>
+  <path d="M44 50q5-4 10 0M66 50q5-4 10 0" stroke="#8a4a1a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M54 70h12l-6 6z" fill="#6b2f14"/>
+  <path d="M60 76v4M60 80q-4 4-8 1M60 80q4 4 8 1" stroke="#6b2f14" stroke-width="2" fill="none" stroke-linecap="round"/>
+ </svg>`,
+ phyto:`<svg viewBox="0 0 120 120" aria-hidden="true">
+  <path d="M18 112c4-28 18-40 42-40s38 12 42 40z" fill="#6b4a2e"/>
+  <path d="M30 112c3-18 12-26 30-26s27 8 30 26" fill="#825b39"/>
+  <path d="M60 14c22 0 34 16 34 36 0 18-10 28-18 32H44c-8-4-18-14-18-32 0-20 12-36 34-36z" fill="#fbfaf5"/>
+  <path d="M26 52c4-4 10-6 14-4M94 52c-4-4-10-6-14-4" stroke="#d9d4c5" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M38 44l18 6M82 44l-18 6" stroke="#3b3024" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="47" cy="54" r="5.5" fill="#f0b21f"/><circle cx="73" cy="54" r="5.5" fill="#f0b21f"/>
+  <circle cx="47" cy="55" r="2.8" fill="#1e1a14"/><circle cx="73" cy="55" r="2.8" fill="#1e1a14"/>
+  <path d="M60 58c10 0 14 8 10 18-2 5-6 8-10 12-4-4-8-7-10-12-4-10 0-18 10-18z" fill="#f0b21f"/>
+  <path d="M52 68c5 3 11 3 16 0" stroke="#b77f10" stroke-width="2" fill="none"/>
+  <path d="M60 88c-2-3-3-6-3-9" stroke="#b77f10" stroke-width="1.6" fill="none"/>
+ </svg>`,
+ ceutics:`<svg viewBox="0 0 120 120" aria-hidden="true">
+  <ellipse cx="30" cy="36" rx="11" ry="12" fill="#54505c"/><ellipse cx="90" cy="36" rx="11" ry="12" fill="#54505c"/>
+  <ellipse cx="30" cy="37" rx="5" ry="6" fill="#e9b7c6"/><ellipse cx="90" cy="37" rx="5" ry="6" fill="#e9b7c6"/>
+  <path d="M60 22c26 0 42 20 42 44 0 26-20 42-42 42S18 92 18 66c0-24 16-44 42-44z" fill="#9a97a3"/>
+  <path d="M26 58c6-16 18-24 24-24 2 14-2 34-8 46-8-2-16-10-16-22zM94 58c-6-16-18-24-24-24-2 14 2 34 8 46 8-2 16-10 16-22z" fill="#2c2a31"/>
+  <path d="M60 22c-8 0-12 8-12 20 0 20 4 44 12 56 8-12 12-36 12-56 0-12-4-20-12-20z" fill="#fbfbfc"/>
+  <circle cx="42" cy="62" r="4.2" fill="#fff"/><circle cx="78" cy="62" r="4.2" fill="#fff"/>
+  <circle cx="42.6" cy="62.6" r="2.4" fill="#111"/><circle cx="78.6" cy="62.6" r="2.4" fill="#111"/>
+  <ellipse cx="60" cy="96" rx="7" ry="5" fill="#2c2a31"/>
+  <ellipse cx="58" cy="94.5" rx="2" ry="1.2" fill="#6d6a75"/>
+ </svg>`,
+ medic:`<svg viewBox="0 0 120 120" aria-hidden="true">
+  <!-- Tiger body -->
+  <ellipse cx="60" cy="88" rx="30" ry="18" fill="#0f7285"/>
+  <ellipse cx="60" cy="84" rx="28" ry="16" fill="#1a9aad"/>
+  <!-- Tiger stripes on body -->
+  <path d="M42 80 Q50 74 48 88" stroke="#0a5566" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M56 76 Q64 70 62 86" stroke="#0a5566" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M70 78 Q78 72 76 88" stroke="#0a5566" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Tiger head -->
+  <ellipse cx="60" cy="46" rx="26" ry="22" fill="#1a9aad"/>
+  <!-- Ears -->
+  <polygon points="38,32 34,18 48,28" fill="#1a9aad"/>
+  <polygon points="82,32 86,18 72,28" fill="#1a9aad"/>
+  <polygon points="39,30 36,20 47,27" fill="#0f7285"/>
+  <polygon points="81,30 84,20 73,27" fill="#0f7285"/>
+  <!-- Face markings -->
+  <ellipse cx="60" cy="52" rx="16" ry="10" fill="#9cdce8" opacity=".4"/>
+  <!-- Eyes -->
+  <circle cx="50" cy="42" r="6" fill="#fff"/>
+  <circle cx="70" cy="42" r="6" fill="#fff"/>
+  <circle cx="51" cy="43" r="3.5" fill="#0a3d47"/>
+  <circle cx="71" cy="43" r="3.5" fill="#0a3d47"/>
+  <circle cx="52" cy="42" r="1.2" fill="#fff"/>
+  <circle cx="72" cy="42" r="1.2" fill="#fff"/>
+  <!-- Nose -->
+  <ellipse cx="60" cy="52" rx="4" ry="2.5" fill="#0a5566"/>
+  <!-- Mouth -->
+  <path d="M56 55 Q60 59 64 55" stroke="#0a5566" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- Whiskers -->
+  <line x1="38" y1="50" x2="54" y2="52" stroke="#9cdce8" stroke-width="1.2" opacity=".8"/>
+  <line x1="38" y1="54" x2="54" y2="54" stroke="#9cdce8" stroke-width="1.2" opacity=".8"/>
+  <line x1="82" y1="50" x2="66" y2="52" stroke="#9cdce8" stroke-width="1.2" opacity=".8"/>
+  <line x1="82" y1="54" x2="66" y2="54" stroke="#9cdce8" stroke-width="1.2" opacity=".8"/>
+  <!-- Tail -->
+  <path d="M88 84 Q100 72 96 60 Q92 50 100 44" stroke="#1a9aad" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M96 60 Q92 50 100 44" stroke="#0a5566" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="4,3"/>
+ </svg>`
+};
+
+const H={
+ pharma:{name:"Pharma",ar:"بيت الأسد",c:"--pharma",hex:"#dd5a18",
+  virtues:["COURAGE","INITIATIVE","LEADERSHIP"],traits:["شجاع","مبادر","قيادي","بيحب التحدي"],
+  blurb:"بتدخل في الصعب من غير تردد، وبتحب تكون أول واحد يبدأ. التحدي بالنسبالك مش عقبة، ده الوقود.",
+  about:"عالم الأدوية وتأثيرها على الجسم: الدوا بيشتغل إزاي، وبيوصل لفين، وإيه اللي بيحصل لو الجرعة زادت."},
+ phyto:{name:"Phyto",ar:"بيت النسر",c:"--phyto",hex:"#4f8a22",
+  virtues:["CURIOSITY","INSIGHT","DISCOVERY"],traits:["فضولي","ذكي","تحليلي","بيحب يكتشف"],
+  blurb:"سؤال «ليه؟» مش بيسيبك. بتحب توصل لأصل الحاجة وتكتشف اللي محدش واخد باله منه.",
+  about:"النباتات الطبية والمواد الطبيعية: إزاي نطلّع مادة فعالة من نبات، ونتعرف عليها، ونحوّلها لعلاج."},
+ ceutics:{name:"Pharmaceutics",ar:"بيت الغرير",c:"--ceutics",hex:"#9c2f6e",
+  virtues:["PATIENCE","PRECISION","DILIGENCE"],traits:["صبور","دقيق","مجتهد","خطوة بخطوة"],
+  blurb:"إنت اللي الفريق بيعتمد عليه. بتمشي بخطة، ومش بتسيب تفصيلة إلا لما تتأكد إنها مظبوطة.",
+  about:"إزاي المادة الفعالة تبقى دوا في إيدك: أقراص، كبسولات، كريمات، شراب… وكل واحدة ليها تركيبة وحسابات دقيقة."},
+ medic:{name:"Medicinal",ar:"بيت النمر",c:"--medic",hex:"#0f7285",
+  virtues:["AMBITION","STRATEGY","SMART CHOICES"],traits:["طموح","استراتيجي","ذكي في قراراته","بيدور على أفضل نتيجة"],
+  blurb:"بتشوف الطريق الأذكى قبل ما تتحرك، وعينك دايمًا على أحسن نتيجة ممكنة، مش أي نتيجة.",
+  about:"تصميم الدوا من أول جزيء: إزاي نعدّل في تركيب المادة الكيميائية عشان تبقى أقوى وأأمن."}
+};
+const ORDER=["pharma","phyto","ceutics","medic"];
+const Q=[
+ {q:"لو واجهت مشكلة صعبة في أول أسبوع ليك في الكلية، هتعمل إيه؟",o:[["أواجهها فورًا وأجرب أحلها بنفسي.","pharma"],["أحاول أفهم سبب المشكلة وأدور وراها.","phyto"],["أقسمها لخطوات صغيرة وأحلها واحدة واحدة.","ceutics"],["أفكر في أكتر طريقة ذكية وأقل مجهود توصلني للحل.","medic"]]},
+ {q:"لو عندك امتحان بعد أسبوع، إيه طريقتك؟",o:[["أبدأ بدري وأمشي على خطة ثابتة.","ceutics"],["أركز على الحاجات المهمة اللي هتديني أكبر نتيجة.","medic"],["أذاكر وأفضل أسأل: «ليه؟ وإزاي؟» مش بس أحفظ.","phyto"],["أتحمس للتحدي وأدخل الامتحان وأنا واثق إني هقدر عليه.","pharma"]]},
+ {q:"إيه أكتر حاجة بتشدك في تجربة جديدة؟",o:[["إنها فرصة أثبت لنفسي إني أقدر.","pharma"],["إنها فيها حاجة جديدة أقدر أكتشفها.","phyto"],["إنها محتاجة صبر ومهارة عشان أوصل لنتيجة مظبوطة.","ceutics"],["إنها فرصة أتميز وأوصل لنتيجة مش أي حد يقدر يوصلها.","medic"]]},
+ {q:"لو اشتغلت في Team Project، غالبًا هتكون…",o:[["الشخص اللي بياخد المبادرة ويبدأ الشغل.","pharma"],["الشخص اللي بيطلع الأفكار ويدور على معلومات جديدة.","phyto"],["الشخص اللي بيتأكد إن كل حاجة اتعملت صح وفي معادها.","ceutics"],["الشخص اللي بيحط الخطة وبيوزع المهام عشان نطلع بأفضل نتيجة.","medic"]]},
+ {q:"اختار الجملة الأقرب ليك:",en:true,o:[["Bring on the challenge.","pharma"],["I need to know why.","phyto"],["If it's worth doing, it's worth doing right.","ceutics"],["There is always a smarter way.","medic"]]},
+ {q:"لو قدامك 4 طرق مختلفة للنجاح، هتختار…",o:[["الطريق الأصعب، عشان لما أوصل أعرف إني قدرت.","pharma"],["الطريق اللي هتعلم منه أكتر حاجة.","phyto"],["الطريق اللي محتاج شغل وصبر بس نتيجته مضمونة.","ceutics"],["الطريق اللي فيه فرصة أكبر إني أتميز عن الباقيين.","medic"]]},
+ {q:"إيه أكتر حاجة ممكن تخليك تستمتع بمادة؟",o:[["إنها مليانة تحديات ومش سهلة.","pharma"],["إنها بتخليني أكتشف حاجات وأفهم أسرار جديدة.","phyto"],["إنها محتاجة دقة وتركيز وتطبيق عملي.","ceutics"],["إنها محتاجة تفكير وتحليل للوصول لأفضل حل.","medic"]]}
+];
+const KEYS=["A","B","C","D"];
+
+let S=window.claude?.hot?.data?.S||{screen:"intro",i:0,ans:[],name:""};
+window.claude?.hot?.snapshot?.(()=>({S}));
+const app=document.getElementById("app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* bunting */
+(function(){const cols=["#dd5a18","#4f8a22","#9c2f6e","#0f7285","#1f3b73"];const n=16,w=640/n;let s=`<svg viewBox="0 0 640 74" preserveAspectRatio="none"><path d="M0 8 Q320 34 640 8" stroke="#8b8f99" stroke-width="1.5" fill="none"/>`;
+ for(let k=0;k<n;k++){const x=k*w+4,y=8+Math.sin(Math.PI*(k+.5)/n)*24*.9;s+=`<path class="flag" style="animation-delay:${-k*.23}s" d="M${x} ${y} L${x+w-8} ${y} L${x+(w-8)/2} ${y+32}Z" fill="${cols[k%5]}"/>`;}
+ document.getElementById("bunting").innerHTML=s+"</svg>";})();
+
+/* confetti */
+const cv=document.getElementById("confetti"),cx=cv.getContext("2d");let bits=[],running=false;
+function sizeCv(){const d=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);}addEventListener("resize",sizeCv);sizeCv();
+function confetti(main){if(reduce)return;const cols=[main,main,main,"#1f3b73","#f0b21f","#ffffff"];
+ for(let k=0;k<160;k++){const fromLeft=k%2===0;bits.push({x:fromLeft?-10:innerWidth+10,y:innerHeight*.55+Math.random()*80,vx:(fromLeft?1:-1)*(4+Math.random()*7),vy:-(8+Math.random()*9),w:6+Math.random()*6,h:8+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.35,c:cols[k%cols.length],life:1});}
+ if(!running){running=true;requestAnimationFrame(tick);}}
+function tick(){cx.clearRect(0,0,innerWidth,innerHeight);bits=bits.filter(b=>b.y<innerHeight+40&&b.life>0);
+ for(const b of bits){b.vy+=.28;b.vx*=.99;b.x+=b.vx;b.y+=b.vy;b.r+=b.vr;b.life-=.004;cx.save();cx.translate(b.x,b.y);cx.rotate(b.r);cx.scale(1,Math.cos(b.r*2));cx.fillStyle=b.c;cx.strokeStyle="rgba(0,0,0,.08)";cx.fillRect(-b.w/2,-b.h/2,b.w,b.h);cx.strokeRect(-b.w/2,-b.h/2,b.w,b.h);cx.restore();}
+ if(bits.length)requestAnimationFrame(tick);else{running=false;cx.clearRect(0,0,innerWidth,innerHeight);}}
+
+/* sound (opt-in by first click; short synth cues) */
+let AC=null;function ac(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();}catch(e){}return AC;}
+function blip(f=660,d=.12,v=.06,type="triangle"){const a=ac();if(!a)return;const t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02);}
+function fanfare(){const a=ac();if(!a)return;[[523,0],[659,.12],[784,.24],[1047,.4]].forEach(([f,dt])=>setTimeout(()=>{blip(f,.5,.07,"square");blip(f/2,.5,.04,"triangle")},dt*1000));}
+
+function scores(){const t={pharma:0,phyto:0,ceutics:0,medic:0};S.ans.forEach((a,k)=>{if(a!=null)t[Q[k].o[a][1]]++;});return t;}
+function winner(){const t=scores(),max=Math.max(...Object.values(t)),tied=ORDER.filter(h=>t[h]===max);if(tied.length===1)return tied[0];
+ const m=S.ans[4]!=null?Q[4].o[S.ans[4]][1]:null;if(tied.includes(m))return m;
+ for(let k=S.ans.length-1;k>=0;k--){const h=Q[k].o[S.ans[k]][1];if(tied.includes(h))return h;}return tied[0];}
+function go(s){S.screen=s;render();window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});}
+function render(){({intro,quiz,sorting,result})[S.screen]();}
+
+function intro(){
+ app.innerHTML=`<section class="enter" style="display:flex;flex-direction:column;gap:22px">
+  <div class="title">
+    <h1><span class="the">THE</span><span>PHARMA</span><span>SORTING</span></h1>
+    <p class="ar">أنهي قسم في صيدلة يشبهك؟</p>
+  </div>
+  <p class="lede">٧ أسئلة، ٤ بيوت، ونتيجة واحدة بس. جاوب بصراحة، وفي الآخر هتاخد شهادة باسمك.</p>
+  <div class="houses">${ORDER.map(h=>`<div class="hcard" style="--c:var(${H[h].c})">${ART[h]}<span class="nm">${H[h].name}</span><span class="tr">${H[h].virtues.join(" • ")}</span></div>`).join("")}</div>
+  <div class="center"><button class="btn" id="go">START THE SORTING · <span class="ar">يلا</span></button></div>
+ </section>`;
+ document.getElementById("go").onclick=()=>{blip(784);S={screen:"quiz",i:0,ans:[],name:S.name||""};go("quiz");};
+}
+
+function quiz(){
+ const q=Q[S.i],cur=S.ans[S.i];
+ app.innerHTML=`<section class="sheet enter">
+  <div class="qtop"><span class="qtag">QUESTION ${S.i+1}</span>
+    <div class="pips" aria-label="السؤال ${S.i+1} من ${Q.length}">${Q.map((_,k)=>{const a=S.ans[k];const c=a!=null?`style="--c:var(${H[Q[k].o[a][1]].c})"`:"";return `<span class="pip ${a!=null&&k!==S.i?"on":""} ${k===S.i?"now":""}" ${c}></span>`}).join("")}</div></div>
+  <h2 class="q">${esc(q.q)}</h2>
+  <ul class="opts" role="radiogroup">${q.o.map((o,k)=>`<li><button class="opt ${cur===k?"picked":""}" role="radio" aria-checked="${cur===k}" data-k="${k}"><span class="k">${KEYS[k]}</span><span ${q.en?'lang="en"':''}>${esc(q.en?`“${o[0]}”`:o[0])}</span></button></li>`).join("")}</ul>
+  <div class="qfoot"><button class="linkbtn" id="back" ${S.i===0?"disabled":""}>السؤال اللي فات</button><span class="count">${S.i+1} / ${Q.length}</span></div>
+ </section>`;
+ app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+  if(app.dataset.busy)return;app.dataset.busy="1";S.ans[S.i]=+b.dataset.k;blip(520+S.i*70);
+  app.querySelectorAll(".opt").forEach(x=>{x.classList.toggle("picked",x===b);x.setAttribute("aria-checked",x===b);});
+  setTimeout(()=>{delete app.dataset.busy;if(S.i<Q.length-1){S.i++;go("quiz");}else go("sorting");},reduce?100:380);
+ });
+ document.getElementById("back").onclick=()=>{if(S.i>0){S.i--;go("quiz");}};
+}
+
+function sorting(){
+ const w=winner();
+ app.innerHTML=`<section class="sheet sorting enter">
+  <p class="lbl">THE SORTING HAS BEGUN</p>
+  <div class="reel shake" id="reel"><div class="banner" id="ban"></div></div>
+  <p class="say" id="say">همم… فيك من كل بيت حاجة…</p>
+ </section>`;
+ const ban=document.getElementById("ban"),reel=document.getElementById("reel"),say=document.getElementById("say");
+ const show=h=>{ban.style.setProperty("--c",`var(${H[h].c})`);ban.innerHTML=`${ART[h]}<span class="nm">${H[h].name}</span>`;};
+ let k=0,delay=70;const seq=[];for(let i=0;i<18;i++)seq.push(ORDER[i%4]);while(seq[seq.length-1]!==w)seq.push(ORDER[(ORDER.indexOf(seq[seq.length-1])+1)%4]);
+ if(reduce){show(w);setTimeout(()=>go("result"),300);return;}
+ const lines={6:"بس فيه حاجة غالبة عليك…",13:"استنى… خلاص…"};
+ const step=()=>{show(seq[k]);blip(300+(k%4)*90,.06,.035,"square");if(lines[k])say.textContent=lines[k];k++;
+  if(k<seq.length){delay*=1.12;setTimeout(step,delay);}else{reel.classList.remove("shake");say.textContent="عرفت!";setTimeout(()=>go("result"),700);}};
+ setTimeout(step,500);
+}
+
+function result(){
+ const w=winner(),h=H[w],t=scores();
+ app.innerHTML=`<section style="display:flex;flex-direction:column;gap:20px">
+  <div class="cert" style="--c:var(${h.c})" id="cert">
+    <p class="yh">YOU HAVE BEEN SORTED INTO</p>
+    <p class="dept ${h.name.length>8?"long":""}">${h.name}</p>
+    <p class="house-ar">${h.ar}</p>
+    <p class="virt">${h.virtues.join(" • ")}</p>
+    <p class="virt-ar">${h.traits.join(" · ")}</p>
+    <div class="mid">
+      <div class="namefield"><input id="nm" type="text" maxlength="28" placeholder="اكتب اسمك هنا" value="${esc(S.name||"")}" aria-label="اسمك"><label for="nm">NAME</label></div>
+      ${ART[w]}
+    </div>
+    <p class="foot">FACULTY OF PHARMACY · CAIRO UNIVERSITY · FOPCU SCIENTIFIC COMMITTEE</p>
+  </div>
+  <p class="hint">اكتب اسمك على الشهادة وخد اسكرين شوت، ونزّلها ستوري 📸</p>
+  <div class="sheet info" style="--c:var(${h.c})">
+    <div><h3>ليه ${h.name}؟</h3><p>${h.blurb}</p></div>
+    <div><h3>القسم ده بيدرس إيه؟</h3><p>${h.about}</p></div>
+    <div><h3>نقطك في كل بيت</h3>
+      <div class="tally">${ORDER.map(k=>`<div class="trow" style="--c:var(${H[k].c})"><span class="n">${H[k].name}</span><span class="bar"><i data-w="${t[k]/7*100}"></i></span><span class="v">${t[k]}</span></div>`).join("")}</div>
+    </div>
+    <div class="center"><button class="btn alt" id="again">PLAY AGAIN</button><button class="btn" id="share">COPY RESULT</button></div>
+    <p class="toast" id="toast" role="status"></p>
+  </div>
+ </section>`;
+ setTimeout(()=>{confetti(h.hex);fanfare();app.querySelectorAll(".trow i").forEach(i=>i.style.width=i.dataset.w+"%");},350);
+ document.getElementById("nm").oninput=e=>{S.name=e.target.value;};
+ document.getElementById("again").onclick=()=>{S={screen:"intro",i:0,ans:[],name:S.name};go("intro");};
+ document.getElementById("share").onclick=async()=>{
+  const txt=`${S.name?S.name+" — ":""}I've been sorted into ${h.name}! (${h.traits.join("، ")}) — The Pharma Sorting من اللجنة العلمية. وإنت طلعت إيه؟ ${location.href.startsWith("http")&&!location.href.includes("claude.ai")?location.href:""}`.trim();
+  const toast=document.getElementById("toast");try{await navigator.clipboard.writeText(txt);toast.textContent="اتنسخت! الزقها في الجروب.";}catch{toast.textContent=txt;}};
+}
+
+function start(){render();}
+window.claude?.hot?.ready?window.claude.hot.ready(start):start();
+</script>
